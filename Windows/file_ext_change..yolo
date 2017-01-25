@@ -18,7 +18,7 @@ if ($args[1] -eq $null) {
 }
 
 $currentPath = (Get-Item -Path ".\" -Verbose).FullName
-$filePath = Get-Item $args[0]
+$filePath = $args[0]
 $newExt = $args[1]
 
 if ($newExt -isnot [string]) {
@@ -26,7 +26,7 @@ if ($newExt -isnot [string]) {
 }
 
 #gets rid of period if they passed ".txt" instead of "txt"
-if ($newExt.IndexOf(".") -eq 0) {
+if ($newExt.IndexOf(".") -is 0) {
     $newExt = $newExt.Substring(1)
 }
 
@@ -35,16 +35,17 @@ if ($filePath.GetType().Name -match "DirectoryInfo") {
     $filePath = ($filePath | Get-ChildItem)
 } 
 
-if (Test-Path $filePath[0].Directory) {    
-    
-    $filePath | Rename-Item -NewName {$_.BaseName+"."+$newExt}
+if (Test-Path $filePath) {
+    cd $args[0]
+    $files = dir
+    dir | Rename-Item -NewName {$_.BaseName+"."+$newExt}
 
     Write-Output("")
     Write-Output("Renamed the following files:")
     Write-Output("----------------------------")
 
-    ForEach ($file in $filePath) {
-        Write-Output($file.Name)
+    ForEach ($file in $files) {
+        Write-Output($file)
     }
 } else {
     Write-Output("")
