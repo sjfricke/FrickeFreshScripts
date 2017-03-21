@@ -16,4 +16,4 @@ These are not 100% robust scripts but all will show you options with `--help`
 * `file_ext_change.sh`
 	* Will take a set of files and change the file extensions	
 	* Use: `./file_ext_change.sh < filePath/with/*.wildcard > < .newExtension >`
-	* Example: `./file_ext_change.ps1 ./images/*.png .jpg`
+	* Example: `./file_ext_change.sh ./images/*.png .jpg`
