@@ -7,5 +7,5 @@
 * Show 10 biggest memory hogs
   *  `ps aux | awk '{if ($5 != 0 ) print $2,$5,$6,$11}' | sort -k2n | tail -10`
 * Show 10 largest files in path
-  * `du -sk /PATH/* | sort -r -n | head -10`
+  * `du -sk /PATH/* | sort -rn | head -10`
 
